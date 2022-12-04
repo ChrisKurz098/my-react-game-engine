@@ -1,0 +1,9 @@
+body{
+    background-color: black;
+}
+.game-window{
+    position: relative;
+    background-color: white;
+    transform-origin: top left;
+    clip-path: inset(0px 0px 0px 0px);
+}
