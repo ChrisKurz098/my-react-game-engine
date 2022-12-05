@@ -7,7 +7,7 @@ import Player from "../Player/player.component"
 const GameWindow = ({ gameDim }) => {
     const [gameTicker, setGameTicker] = useState(0);
     const [screenScale, setScreenScale] = useState(window.innerWidth / gameDim.w);
-    const [player, setPlayer] = useState({ w: 50 ,h: 50,x: 0, y: 0, dir: 0, spdA: 5, spdB: 10,  animate: 'paused' })
+    const [player, setPlayer] = useState({ w: 50 ,h: 50,x: 0, y: 0, dir: 0, fall: 0, spdA: 5, spdB: 10,  scale: 1 })
     const [kbCheck, setKbCheck] = useState([]);
     let borderWidth = (window.innerWidth - (screenScale * gameDim.w)) / 2; //calcualtes the width of the left and right black bars
 
@@ -17,28 +17,32 @@ const GameWindow = ({ gameDim }) => {
         setInterval(() => {
             requestAnimationFrame(() => {
                 setGameTicker(old => ((old < 720) ? old + 1 : 0));
-                checkScreenScale(gameDim, setScreenScale);
             })
         }, 16.67)
     }, [])
 
     useEffect(() => {
-        //Game logic goes here
-        //console.log(kbCheck)
+        checkScreenScale(gameDim, setScreenScale);
+        //---------Game logic goes here---------//
 
         //--Player Movement--//
         setPlayer(old => {
-            let {spdA: spd,w,h,x,y} = old;
-            const change = {animate: 'paused'};
+            let {spdA: spd,w,h,x,y, scale, fall} = old;
+            const change = {};
             let hDir = 0;
             let vDir = 0;
+            const jumpSpeed = .1;
+            if (kbCheck.includes(' ')) { change.scale = scale+jumpSpeed } else {change.scale = (scale>1) ? scale-jumpSpeed : 1}
+            
             if (kbCheck.includes('shift')) { spd = old.spdB }
             if (kbCheck.includes('arrowright')) { hDir = 1; (x > gameDim.w) ? change.x = -w : change.x = old.x + spd; }
             if (kbCheck.includes('arrowleft')) { hDir = -1; (x < -(w)) ? change.x = gameDim.w - 1 : change.x = old.x - spd; }
             if (kbCheck.includes('arrowup')) { vDir = -1; (y < -(h)) ? change.y = gameDim.h - 1 : change.y = old.y - spd; }
             if (kbCheck.includes('arrowdown')) { vDir = 1; (y > gameDim.h) ? change.y = -h : change.y = old.y + spd; }
+           
+          
 
-            if (hDir || vDir) {change.animate = 'running'}
+            // if (hDir || vDir) {change.animate = 'running'}
 
             switch (true) {
                 case (hDir === 1 && !vDir): change.dir = 0; break;
