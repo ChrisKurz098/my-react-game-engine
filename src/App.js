@@ -4,7 +4,7 @@ import GameWindow from './components/GameWindow/gamewindow.component';
 function App() {
   return (
     <div className="App">
-      <GameWindow gameDim={{w: 720, h: 480}}/>
+      <GameWindow gameDim={{w: 1280, h: 720}}/>
     </div>
   );
 }
