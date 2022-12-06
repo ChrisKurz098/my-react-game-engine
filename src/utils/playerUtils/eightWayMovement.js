@@ -2,7 +2,7 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
     setPlayer(old => {
         const [jumpSpeed, maxJump] = params;
         let { spdA: spd, w, h, x, y, scale, jump } = old;
-        const walls = document.querySelectorAll('.wall');
+      
         x = x + w / 2;
         y = y + h / 2;
         const change = { x: old.x, y: old.y };;
@@ -23,7 +23,7 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
         if (kbCheck.includes('arrowdown')) { vDir = 1; (y > gameDim.h) ? change.y = -h : change.y += spd; }
 
 
-  
+        const walls = document.querySelectorAll('.wall');
         walls.forEach((wall) => {
             let { height, width, left, top } = wall.style;
             width = parseInt(width);
