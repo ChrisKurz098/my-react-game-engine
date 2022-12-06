@@ -29,7 +29,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        tankControls(gameDim,setPlayer, kbCheck, [.04, 2, 5]);
+        mouseAim(gameDim,setPlayer, kbCheck,msCheck, [.04, 2, 5]);
 
     }, [gameTicker])
 

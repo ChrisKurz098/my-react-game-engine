@@ -32,12 +32,11 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
             y += spd * Math.sin((change.dir || dir) * Math.PI / 180);
 
         }
-
         change.x = x;
         change.y = y;
 
-
-        const walls = document.querySelectorAll('.wall');
+//---Collision Detection WALLS ---//
+const walls = document.querySelectorAll('.wall');
         walls.forEach((wall) => {
             let { height, width, left, top } = wall.style;
             width = parseInt(width);
@@ -52,11 +51,11 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
             const vv = (cyy - cy >= 0) ? (1) : (-1);
             cx = cx + (w / 2 * hh);
             cy = cy + (h / 2 * vv);
-             x = old.x + w / 2;
-             y = old.y + h / 2;
-            if (Math.abs(cxx - cx) <= (width/2) && y + (h / 2 * vv) >= yy && y + (h / 2 * vv) <= yy + height) change.x = old.x;
+             x = (old.x + w / 2)+ (w / 2 * hh);
+             y = (old.y + h / 2)+ (h / 2 * vv);
+            if (Math.abs(cxx - cx) <= (width/2) && y  >= yy && y  <= yy + height) change.x = old.x;
 
-            if (Math.abs(cyy - cy) <= (height/2) && x + (w / 2 * hh) >= xx && x + (w / 2 * hh) <= xx + width) change.y = old.y;
+            if (Math.abs(cyy - cy) <= (height/2) && x >= xx && x <= xx + width) change.y = old.y;
 
         });
 
