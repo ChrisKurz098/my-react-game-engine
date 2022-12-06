@@ -52,9 +52,11 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
             const vv = (cyy - cy >= 0) ? (1) : (-1);
             cx = cx + (w / 2 * hh);
             cy = cy + (h / 2 * vv);
-            if (Math.abs(cxx - cx) <= (width/2) && old.y + (h / 2 * vv) >= yy && old.y + (h / 2 * vv) <= yy + height) change.x = old.x;
+            const oldx = old.x + w / 2;
+            const oldy = old.y + h / 2;
+            if (Math.abs(cxx - cx) <= (width/2) && oldy + (h / 2 * vv) >= yy && oldy + (h / 2 * vv) <= yy + height) change.x = old.x;
 
-            if (Math.abs(cyy - cy) <= (height/2) && old.x + (w / 2 * hh) >= xx && old.x + (w / 2 * hh) <= xx + width) change.y = old.y;
+            if (Math.abs(cyy - cy) <= (height/2) && oldx + (w / 2 * hh) >= xx && oldx + (w / 2 * hh) <= xx + width) change.y = old.y;
 
         });
 
