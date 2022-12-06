@@ -18,11 +18,9 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
         //Rotate
         if (kbCheck.includes('arrowleft')) {
             (dir < 360) ? change.dir = dir + turnSpeed : change.dir = 0;
-            console.log(dir)
-        }
+               }
         if (kbCheck.includes('arrowright')) {
             (dir <= 0) ? change.dir = 360 : change.dir = dir - turnSpeed;
-            console.log(dir)
         }
 
         if (kbCheck.includes('arrowup')) {
@@ -46,14 +44,16 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
             height = parseInt(height);
             let xx = parseInt(left);
             let yy = parseInt(top);
+            const cxx = xx+width/2;
+            const cyy = yy+height/2
             let cx = (change.x + w / 2);
             let cy = (change.y + h / 2);
-            const hh = (xx - cx >= 0) ? (1) : (-1);
-            const vv = (yy - cy >= 0) ? (1) : (-1);
+            const hh = (cxx - cx >= 0) ? (1) : (-1);
+            const vv = (cyy - cy >= 0) ? (1) : (-1);
             cx = cx + (w / 2 * hh);
             cy = cy + (h / 2 * vv);
             if (cx  >= xx && cx  <= xx + width && cy >= yy && cy <= yy + height) change.x = old.x;
-            
+
             if (cy >= yy && cy <= yy + height && cx  >= xx && cx  <= xx + width) change.y = old.y;
 
         });
