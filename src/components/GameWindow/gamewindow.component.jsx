@@ -38,6 +38,8 @@ const GameWindow = ({ gameDim }) => {
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px` }}>
                 <Player player={player} setPlayer={setPlayer} />
                 <div className="wall" style={{position: 'absolute', top: '200px', left: '200px', width: '150px', height: '150px', backgroundColor: 'red'}}/>
+                <div className="wall" style={{position: 'absolute', top: '300px', left: '1000px', width: '150px', height: '350px', backgroundColor: 'red'}}/>
+           
             </div>
         </div>
     )

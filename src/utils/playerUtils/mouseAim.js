@@ -13,6 +13,8 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
         const scaleSize = rect.width / gameDim.w;
         var xm = (msCheck.clientX - rect.x) / scaleSize; //x position within the element.
         var ym = (msCheck.clientY - rect.y) / scaleSize;  //y position within the element.
+        let hDir = 0;
+        let vDir = 0;
         //--jumping--//
         if (kbCheck.includes(' ') && !jump) (change.jump = 1);
         if (jump === 1 && !kbCheck.includes(' ')) change.jump = 2;
@@ -22,10 +24,10 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
         if (jump === 2 && scale <= 1 && !kbCheck.includes(' ')) { change.jump = 0; change.scale = 1 };
 
         if (kbCheck.includes('shift')) { spd = old.spdB }
-        if (kbCheck.includes('d')) { (x > gameDim.w) ? change.x = -w : change.x = old.x + spd; }
-        if (kbCheck.includes('a')) { (x < -(w)) ? change.x = gameDim.w - 1 : change.x = old.x - spd; }
-        if (kbCheck.includes('w')) { (y < -(h)) ? change.y = gameDim.h - 1 : change.y = old.y - spd; }
-        if (kbCheck.includes('s')) { (y > gameDim.h) ? change.y = -h : change.y = old.y + spd; }
+        if (kbCheck.includes('d')) { hDir = 1; (x > gameDim.w) ? change.x = -w : change.x = old.x + spd; }
+        if (kbCheck.includes('a')) { hDir = -1; (x < -(w)) ? change.x = gameDim.w - 1 : change.x = old.x - spd; }
+        if (kbCheck.includes('w')) { vDir = -1; (y < -(h)) ? change.y = gameDim.h - 1 : change.y = old.y - spd; }
+        if (kbCheck.includes('s')) { vDir = 1; (y > gameDim.h) ? change.y = -h : change.y = old.y + spd; }
 
         walls.forEach((wall) => {
             let {height, width, left, top} = wall.style;
@@ -35,11 +37,9 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
             let yy= parseInt(top); yy = yy+(height/2);
             
             if (Math.abs(xx-(change.x+w/2)) <= (width/2) && y >= yy-height/2  && y<= yy+height/2) {
-                console.log('xcollision'); 
                 change.x = old.x;
             };
             if (Math.abs(yy-(change.y+h/2)) <= (height/2) && x >= xx-width/2 && x<= xx+width/2) {
-                console.log('ycollision'); 
                 change.y = old.y;
             };
             
