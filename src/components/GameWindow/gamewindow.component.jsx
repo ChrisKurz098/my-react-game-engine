@@ -29,7 +29,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        mouseAim(gameDim,setPlayer, kbCheck, msCheck, [.04, 2]);
+        eightWayMovement(gameDim,setPlayer, kbCheck, [.04, 2]);
 
     }, [gameTicker])
 
