@@ -25,9 +25,8 @@ const GameWindow = ({ gameDim }) => {
     useEffect(() => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
-        console.log(kbCheck)
         //--Player Movement--//
-        eightWayMovement(gameDim,setPlayer, kbCheck);
+        eightWayMovement(gameDim,setPlayer, kbCheck, [.07, 1.6]);
 
     }, [gameTicker])
 

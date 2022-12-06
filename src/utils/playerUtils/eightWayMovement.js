@@ -1,17 +1,17 @@
-export default function eightWayMovement(gameDim,setPlayer, kbCheck) {
+export default function eightWayMovement(gameDim,setPlayer, kbCheck, params) {
     setPlayer(old => {
+        const [jumpSpeed, maxJump] = params;
         let { spdA: spd, w, h, x, y, scale, jump } = old;
         const change = {};
         let hDir = 0;
         let vDir = 0;
-        const jumpSpeed = .07;
-        const maxJump = 2;
         //--jumping--//
         if (kbCheck.includes('z') && !jump) (change.jump = 1);
+        if (jump === 1 && !kbCheck.includes('z')) change.jump = 2;
         if (jump === 1 && scale < maxJump) change.scale = scale + jumpSpeed;
         if (jump === 1 && scale >= maxJump) change.jump = 2;
         if (jump === 2 && scale > 1) { change.scale = scale - jumpSpeed; };
-        if (jump === 2 && scale <= 1) { change.jump = 0; change.scale = 1 };
+        if (jump === 2 && scale <= 1 && !kbCheck.includes('z')) { change.jump = 0; change.scale = 1 };
 
         if (kbCheck.includes('shift')) { spd = old.spdB }
         if (kbCheck.includes('arrowright')) { hDir = 1; (x > gameDim.w) ? change.x = -w : change.x = old.x + spd; }
