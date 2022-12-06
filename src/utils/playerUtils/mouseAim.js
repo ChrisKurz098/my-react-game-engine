@@ -2,7 +2,11 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
     setPlayer(old => {
         const [jumpSpeed, maxJump] = params;
         let { spdA: spd, w, h, x, y, scale, jump } = old;
-        const change = {};
+       
+        x = x+w/2;
+        y= y+h/2
+     
+        const change = {x: old.x, y: old.y};
         const walls = document.querySelectorAll('.wall');
 
         var rect = document.getElementsByClassName('game-window')[0].getBoundingClientRect();
@@ -24,14 +28,23 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
         if (kbCheck.includes('s')) { (y > gameDim.h) ? change.y = -h : change.y = old.y + spd; }
 
         walls.forEach((wall) => {
-            const {height, width, left, top} = wall.style;
-            let xx= parseInt(left); xx = xx+(width/2)
-            let yy= parseInt(top); yy = yy+(height/2)
-            if (Math.abs(xx-change.x) <= Math.abs(xx-w/2) ) {console.log('xcollision'); change.x = old.x;}
-            if (Math.abs(yy-change.y) <= Math.abs(yy-h/2) ) {console.log('xcollision'); change.y = old.y;}
-            return false
+            let {height, width, left, top} = wall.style;
+            width = parseInt(width);
+            height = parseInt(height);
+            let xx= parseInt(left); xx = xx+(width/2);
+            let yy= parseInt(top); yy = yy+(height/2);
+            
+            if (Math.abs(xx-(change.x+w/2)) <= (width/2) && y >= yy-height/2  && y<= yy+height/2) {
+                console.log('xcollision'); 
+                change.x = old.x;
+            };
+            if (Math.abs(yy-(change.y+h/2)) <= (height/2) && x >= xx-width/2 && x<= xx+width/2) {
+                console.log('ycollision'); 
+                change.y = old.y;
+            };
+            
         });
-        const rad = Math.atan2((ym - (y + (h / 2))), (xm - (x + (w / 2))));
+        const rad = Math.atan2((ym - y), (xm - x));
         change.dir = rad * -180 / Math.PI;
 
         return { ...old, ...change };
