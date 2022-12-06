@@ -3,6 +3,7 @@ import { checkScreenScale } from "../../utils/gameWindowUtils/checkScreenScale";
 import setKeyListeners from "../../utils/gameWindowUtils/setKeyListeners";
 import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
 import mouseAim from "../../utils/playerUtils/mouseAim";
+import tankControls from "../../utils/playerUtils/tankControls";
 import './gameWindowStyle.css'
 
 import Player from "../Player/player.component"
@@ -28,7 +29,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        mouseAim(gameDim,setPlayer, kbCheck, msCheck, [.04, 2]);
+        tankControls(gameDim,setPlayer, kbCheck, [.04, 2, 5]);
 
     }, [gameTicker])
 
