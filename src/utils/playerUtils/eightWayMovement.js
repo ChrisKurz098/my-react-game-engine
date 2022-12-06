@@ -2,7 +2,9 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
     setPlayer(old => {
         const [jumpSpeed, maxJump] = params;
         let { spdA: spd, w, h, x, y, scale, jump } = old;
-        const walls = document.querySelectorAll('.wall');;
+        const walls = document.querySelectorAll('.wall');
+        x = x + w / 2;
+        y = y + h / 2;
         const change = { x: old.x, y: old.y };;
         let hDir = 0;
         let vDir = 0;
@@ -21,6 +23,7 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
         if (kbCheck.includes('arrowdown')) { vDir = 1; (y > gameDim.h) ? change.y = -h : change.y += spd; }
 
 
+  
         walls.forEach((wall) => {
             let { height, width, left, top } = wall.style;
             width = parseInt(width);
@@ -29,10 +32,13 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
             let yy = parseInt(top); yy = yy + (height / 2);
             const cx = (change.x + w / 2) + (w / 2 * hDir);
             const cy = (change.y + h / 2) + (h / 2 * vDir);
-            if (Math.abs(xx - cx) <= (width / 2) && cy - (h / 2 * vDir) >= yy - height / 2 && cy - (h / 2 * vDir) <= yy + height / 2) {
+            //determine which side of the wall you are on
+            const hh = (xx - cx >= 0) ? (1) : (-1);
+            const vv = (yy - cy >= 0) ? (1) : (-1);
+            if (Math.abs(xx - cx) <= (width / 2) && y + (h / 2 * vv) >= yy - height / 2 && y + (h / 2 * vv) <= yy + height / 2) {
                 change.x = old.x;
             };
-            if (Math.abs(yy - cy) <= (height / 2) && cx - (w / 2 * hDir) >= xx - width / 2 && cx - (w / 2 * hDir) <= xx + width / 2) {
+            if (Math.abs(yy - cy) <= (height / 2) && x + (w / 2 * hh) >= xx - width / 2 && x + (w / 2 * hh) <= xx + width / 2) {
                 change.y = old.y;
             };
         });

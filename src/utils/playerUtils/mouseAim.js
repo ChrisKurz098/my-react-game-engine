@@ -37,10 +37,13 @@ export default function mouseAim(gameDim, setPlayer, kbCheck, msCheck, params) {
             let yy = parseInt(top); yy = yy + (height / 2);
             const cx = (change.x + w / 2) + (w / 2 * hDir);
             const cy = (change.y + h / 2) + (h / 2 * vDir);
-            if (Math.abs(xx - cx) <= (width / 2) && cy - (h / 2 * vDir) >= yy - height / 2 && cy - (h / 2 * vDir) <= yy + height / 2) {
+            //determine which side of the wall you are on
+            const hh = (xx - cx >= 0) ? (1) : (-1);
+            const vv = (yy - cy >= 0) ? (1) : (-1);
+            if (Math.abs(xx - cx) <= (width / 2) && y + (h / 2 * vv) >= yy - height / 2 && y + (h / 2 * vv) <= yy + height / 2) {
                 change.x = old.x;
             };
-            if (Math.abs(yy - cy) <= (height / 2) && cx - (w / 2 * hDir) >= xx - width / 2 && cx - (w / 2 * hDir) <= xx + width / 2) {
+            if (Math.abs(yy - cy) <= (height / 2) && x + (w / 2 * hh) >= xx - width / 2 && x + (w / 2 * hh) <= xx + width / 2) {
                 change.y = old.y;
             };
         });
