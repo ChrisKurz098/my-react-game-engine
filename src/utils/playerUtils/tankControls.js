@@ -29,10 +29,12 @@ export default function tankControls(gameDim, setPlayer, kbCheck, params) {
             change.x = x;
             change.y = y;
         }
-        //if (kbCheck.includes('arrowdown')) { vDir = 1; (y > gameDim.h) ? change.y = -h : change.y = old.y + spd; }
-
-      
-      console.log(change.dir, dir, turnSpeed)
+        if (kbCheck.includes('arrowdown')) {
+          x -= spd * Math.cos((change.dir || dir) * Math.PI / 180);
+          y += spd * Math.sin((change.dir || dir) * Math.PI / 180);
+          change.x = x;
+          change.y = y;
+      }
         return { ...old, ...change };
     });
 }
