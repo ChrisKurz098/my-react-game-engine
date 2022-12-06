@@ -29,7 +29,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        tankControls(gameDim,setPlayer, kbCheck, [.04, 2, 5]);
+        mouseAim(gameDim,setPlayer, kbCheck, msCheck, [.04, 2]);
 
     }, [gameTicker])
 
@@ -37,7 +37,7 @@ const GameWindow = ({ gameDim }) => {
         <div className="game-container">
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px` }}>
                 <Player player={player} setPlayer={setPlayer} />
-
+                <div className="wall" style={{position: 'absolute', top: '200px', left: '200px', width: '150px', height: '150px', backgroundColor: 'red'}}/>
             </div>
         </div>
     )
