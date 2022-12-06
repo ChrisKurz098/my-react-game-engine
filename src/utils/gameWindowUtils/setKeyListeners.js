@@ -1,4 +1,4 @@
-export default function setKeyListeners(setKbCheck) {
+export default function setKeyListeners(setKbCheck, setMsCheck) {
    
 
     document.addEventListener('keydown', (e) => {
@@ -23,6 +23,10 @@ export default function setKeyListeners(setKbCheck) {
             return keys
         }
         })
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        setMsCheck(e)
     })
 
 }

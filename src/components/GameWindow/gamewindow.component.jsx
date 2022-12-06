@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { checkScreenScale } from "../../utils/gameWindowUtils/checkScreenScale";
 import setKeyListeners from "../../utils/gameWindowUtils/setKeyListeners";
 import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
+import mouseAim from "../../utils/playerUtils/mouseAim";
 import './gameWindowStyle.css'
 
 import Player from "../Player/player.component"
@@ -10,11 +11,12 @@ const GameWindow = ({ gameDim }) => {
     const [screenScale, setScreenScale] = useState(window.innerWidth / gameDim.w);
     const [player, setPlayer] = useState({ w: 50, h: 50, x: 0, y: 0, dir: 0, jump: 0, spdA: 5, spdB: 10, scale: 1 })
     const [kbCheck, setKbCheck] = useState([]);
+    const [msCheck, setMsCheck] = useState({});
     let borderWidth = (window.innerWidth - (screenScale * gameDim.w)) / 2; //calcualtes the width of the left and right black bars
 
 
     useEffect(() => {
-        setKeyListeners(setKbCheck);
+        setKeyListeners(setKbCheck, setMsCheck);
         setInterval(() => {
             requestAnimationFrame(() => {
                 setGameTicker(old => ((old < 720) ? old + 1 : 0));
@@ -26,7 +28,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        eightWayMovement(gameDim,setPlayer, kbCheck, [.07, 1.6]);
+        mouseAim(gameDim,setPlayer, kbCheck, msCheck, [.04, 2]);
 
     }, [gameTicker])
 
