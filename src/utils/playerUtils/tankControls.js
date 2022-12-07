@@ -2,13 +2,13 @@ import collisionWallPlayer from "./collisionWallPlayer";
 import jumpPlayer from "./jumpPlayer";
 export default function tankControls(gameDim, setPlayer, kbCheck, params) {
     setPlayer(old => {
-        let [jumpSpeed, maxJump, turnSpeed] = params;
+        let [jumpKey,jumpSpeed, maxJump, turnSpeed] = params;
         let { spdA: spd, w, h, x, y, dir, scale, jump } = old;
         const change = {};
         if (!turnSpeed) turnSpeed = 4;
 
         //--Jump--//
-        jumpPlayer(jump,scale,kbCheck,jumpSpeed, maxJump, change)
+        jumpPlayer(jumpKey,jump,scale,kbCheck,jumpSpeed, maxJump, change)
 
         //--run--//
         if (kbCheck.includes('shift')) { spd = old.spdB }
