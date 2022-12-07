@@ -13,7 +13,7 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
 
    //--Jump--//
    jumpPlayer(jumpKey,jump,scale,kbCheck,jumpSpeed, maxJump, change)
-
+        
         if (kbCheck.includes('shift')) { spd = old.spdB }
         if (kbCheck.includes('arrowright')) { hDir = 1; (x > gameDim.w) ? change.x = -w : change.x += spd; }
         if (kbCheck.includes('arrowleft')) { hDir = -1; (x < -(w)) ? change.x = gameDim.w - 1 : change.x -= spd; }

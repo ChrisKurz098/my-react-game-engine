@@ -5,6 +5,7 @@ const Player = ({player}) => {
 
     return (
         <img src={testSprite} alt="pic" style={{ 
+            zIndex: '999',
             transform: `rotate(${-player.dir}deg) scale(${player.scale})`,  
             width: `${player.w}px`, height: `${player.h}px`, 
             position: "absolute", 

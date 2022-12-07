@@ -5,8 +5,7 @@ import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
 import mouseAim from "../../utils/playerUtils/mouseAim";
 import tankControls from "../../utils/playerUtils/tankControls";
 import './gameWindowStyle.css'
-import Wall from "../Walls/wall.component";
-
+import Wall from "../Wall/wall.component";
 import Player from "../Player/player.component"
 const GameWindow = ({ gameDim }) => {
     const [gameTicker, setGameTicker] = useState(0);
@@ -18,7 +17,7 @@ const GameWindow = ({ gameDim }) => {
     const allWalls = [
         {w:100, h:100, x: 500, y: 233, sprite: 'wall.png', tile: false},
         {w:100, h:250, x: 210, y: 533, sprite: 'wall.png', tile: true, tileSize: [100,100]},
-        {w:80, h:400, x: 800, y: 30},
+        {w:80, h:400, x: 800, y: 30, jumpOver: true},
         {w:100, h:100, x: 100, y: 233, sprite: 'wall.png', tile: true, tileSize: [50, 50]},
     ]
 
@@ -36,7 +35,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        eightWayMovement(gameDim,setPlayer, kbCheck, ['z',.04, 2]);
+        tankControls(gameDim,setPlayer, kbCheck, ['z',.04, 2]);
 
     }, [gameTicker])
 
@@ -44,8 +43,8 @@ const GameWindow = ({ gameDim }) => {
         <div className="game-container">
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px` }}>
                 <Player player={player} setPlayer={setPlayer} />
-               {allWalls.map((wallParams) => (
-                 <Wall params = {wallParams}/>
+               {allWalls.map((wallParams, i) => (
+                 <Wall key={`wall${i}`} params = {wallParams}/>
                ))}
            
             </div>
