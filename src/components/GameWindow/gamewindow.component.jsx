@@ -17,6 +17,7 @@ const GameWindow = ({ gameDim }) => {
 
 
     useEffect(() => {
+        //--Initiates game loop by triggering useEffect with setInterval
         setKeyListeners(setKbCheck, setMsCheck);
         setInterval(() => {
             requestAnimationFrame(() => {
@@ -29,7 +30,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        mouseAim(gameDim,setPlayer, kbCheck,msCheck, [' ',.04, 2, 5]);
+        eightWayMovement(gameDim,setPlayer, kbCheck, ['z',.04, 2]);
 
     }, [gameTicker])
 
