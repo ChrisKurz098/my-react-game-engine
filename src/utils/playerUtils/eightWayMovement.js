@@ -1,4 +1,5 @@
 import collisionWallPlayer from "./collisionWallPlayer";
+import jumpPlayer from "./jumpPlayer";
 export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
     setPlayer(old => {
         const [jumpSpeed, maxJump] = params;
@@ -9,13 +10,9 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
         const change = { x: old.x, y: old.y };;
         let hDir = 0;
         let vDir = 0;
-        //--jumping--//
-        if (kbCheck.includes('z') && !jump) (change.jump = 1);
-        if (jump === 1 && !kbCheck.includes('z')) change.jump = 2;
-        if (jump === 1 && scale < maxJump) change.scale = scale + jumpSpeed;
-        if (jump === 1 && scale >= maxJump) change.jump = 2;
-        if (jump === 2 && scale > 1) { change.scale = scale - jumpSpeed; };
-        if (jump === 2 && scale <= 1 && !kbCheck.includes('z')) { change.jump = 0; change.scale = 1 };
+
+   //--Jump--//
+   jumpPlayer(jump,scale,kbCheck,jumpSpeed, maxJump, change)
 
         if (kbCheck.includes('shift')) { spd = old.spdB }
         if (kbCheck.includes('arrowright')) { hDir = 1; (x > gameDim.w) ? change.x = -w : change.x += spd; }
