@@ -5,6 +5,7 @@ import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
 import mouseAim from "../../utils/playerUtils/mouseAim";
 import tankControls from "../../utils/playerUtils/tankControls";
 import './gameWindowStyle.css'
+import Wall from "../Walls/wall.component";
 
 import Player from "../Player/player.component"
 const GameWindow = ({ gameDim }) => {
@@ -14,7 +15,12 @@ const GameWindow = ({ gameDim }) => {
     const [kbCheck, setKbCheck] = useState([]);
     const [msCheck, setMsCheck] = useState({});
     let borderWidth = (window.innerWidth - (screenScale * gameDim.w)) / 2; //calcualtes the width of the left and right black bars
-
+    const allWalls = [
+        {w:100, h:100, x: 500, y: 233, sprite: 'wall.png', tile: false},
+        {w:100, h:250, x: 210, y: 533, sprite: 'wall.png', tile: true, tileSize: [100,100]},
+        {w:80, h:400, x: 800, y: 30},
+        {w:100, h:100, x: 100, y: 233, sprite: 'wall.png', tile: true, tileSize: [50, 50]},
+    ]
 
     useEffect(() => {
         //--Initiates game loop by triggering useEffect with setInterval
@@ -38,8 +44,9 @@ const GameWindow = ({ gameDim }) => {
         <div className="game-container">
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px` }}>
                 <Player player={player} setPlayer={setPlayer} />
-                <div className="wall" style={{position: 'absolute', top: '200px', left: '200px', width: '150px', height: '150px', backgroundColor: 'red'}}/>
-                <div className="wall" style={{position: 'absolute', top: '300px', left: '1000px', width: '150px', height: '350px', backgroundColor: 'red'}}/>
+               {allWalls.map((wallParams) => (
+                 <Wall params = {wallParams}/>
+               ))}
            
             </div>
         </div>
