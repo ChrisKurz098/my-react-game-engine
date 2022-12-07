@@ -1,3 +1,4 @@
+import collisionWallPlayer from "./collisionWallPlayer";
 export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
     setPlayer(old => {
         const [jumpSpeed, maxJump] = params;
@@ -33,28 +34,9 @@ export default function eightWayMovement(gameDim, setPlayer, kbCheck, params) {
             case (hDir === -1 && vDir === 1): change.dir = 225; break;
             default:
         }
-
-        const walls = document.querySelectorAll('.wall');
-        walls.forEach((wall) => {
-            let { height, width, left, top } = wall.style;
-            width = parseInt(width);
-            height = parseInt(height);
-            let xx = parseInt(left)+ (width / 2); 
-            let yy = parseInt(top)+ (height / 2);
-            const cx = (change.x + w / 2) + (w / 2 * hDir);
-            const cy = (change.y + h / 2) + (h / 2 * vDir);
-            //determine which side of the wall you are on
-            const hh = (xx - cx >= 0) ? (1) : (-1);
-            const vv = (yy - cy >= 0) ? (1) : (-1);
-            x = (old.x + w / 2)+ (w / 2 * hh);
-            y = (old.y + h / 2)+ (h / 2 * vv);
-            if (Math.abs(xx - cx) <= (width / 2) && y  >= yy - height / 2 && y  <= yy + height / 2) {
-                change.x = old.x;
-            };
-            if (Math.abs(yy - cy) <= (height / 2) && x  >= xx - width / 2 && x  <= xx + width / 2) {
-                change.y = old.y;
-            };
-        });
+//---Collision Detection WALLS ---//
+collisionWallPlayer(old, change, x,y,h,w)
+       
         return { ...old, ...change };
     });
 }
