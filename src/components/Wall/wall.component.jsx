@@ -12,7 +12,7 @@ const Wall = ({ params }) => {
         ) : (
             <div className={(jumpOver) ? "wall jump-over" : "wall"} style={{
                 position: 'absolute', top: `${y}px`, left: `${x}px`, width: `${w}px`, height: `${h}px`, backgroundColor: `${color}px`, opacity: `${opacity}`,
-                backgroundImage: `url("${require(`../../resources/img/${sprite}`)}")`,
+                backgroundImage: `url("${require(`../../resources/img${sprite}`)}")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: `${w}px ${h}px`, ...styling
             }} />
