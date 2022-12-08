@@ -16,8 +16,8 @@ const GameWindow = ({ gameDim, params }) => {
     const [msCheck, setMsCheck] = useState({});
     let borderWidth = (window.innerWidth - (screenScale * gameDim.w)) / 2; //calcualtes the width of the left and right black bars
     const allWalls = [
-        { w: 100, h: 100, x: 500, y: 233, sprite: 'wall.png', tile: false },
-        { w: 100, h: 250, x: 210, y: 533, sprite: 'wall.png', tile: true, tileSize: [100, 100] },
+        { w: 100, h: 100, x: 500, y: 233, sprite: '/wall.png', tile: false },
+        { w: 100, h: 250, x: 210, y: 533, sprite: '/wall.png', tile: true, tileSize: [100, 100] },
         { w: 80, h: 400, x: 800, y: 30, jumpOver: true },
         { w: 100, h: 100, x: 100, y: 233, color: 'blue', styling: { boxShadow: '10px 5px 5px 5px yellow' } }
     ]
