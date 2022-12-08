@@ -4,6 +4,7 @@ export default function collisionWallPlayer(old, change, x, y, h, w) {
         if (wall.className.includes('jump-over') && old.jump) {
 
         } else {
+           
             //deconstruct style data (strings) from wall element...
             let { height, width, left, top } = wall.style;
             //...and parseInt from the strings
@@ -26,11 +27,19 @@ export default function collisionWallPlayer(old, change, x, y, h, w) {
             //...and where the player currently is
             x = (old.x + w / 2) + (w / 2 * hh);
             y = (old.y + h / 2) + (h / 2 * vv);
+            if (Math.abs(cwx - x) <= (width / 2) &&  Math.abs(cwy - y) <= (height / 2)) {
+                change.x -=  old.spdA * Math.cos((old.dir) * Math.PI / 180);;
+                change.y += old.spdA * Math.sin((old.dir) * Math.PI / 180);
+                change.dir = old.dir;
+                change.jump = 0;
+            } else {
             //if where the player is going to be is a collision...
             //...and if the the CURRENT position of the opposite axis is a collision...
             //...do not update that position
             if (Math.abs(cwx - cx) <= (width / 2) && Math.abs(cwy - y) <= (height / 2)) change.x = old.x;
             if (Math.abs(cwy - cy) <= (height / 2) && Math.abs(cwx - x) <= (width / 2)) change.y = old.y;
+            }
+
         }
     });
 }

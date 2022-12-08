@@ -18,7 +18,7 @@ const GameWindow = ({ gameDim }) => {
         {w:100, h:100, x: 500, y: 233, sprite: 'wall.png', tile: false},
         {w:100, h:250, x: 210, y: 533, sprite: 'wall.png', tile: true, tileSize: [100,100]},
         {w:80, h:400, x: 800, y: 30, jumpOver: true},
-        {w:100, h:100, x: 100, y: 233, color: 'blue', styling: {border: '10px solid yellow'}}
+        {w:100, h:100, x: 100, y: 233, color: 'blue', styling: {boxShadow: '10px 5px 5px 5px yellow'}}
     ]
 
     useEffect(() => {

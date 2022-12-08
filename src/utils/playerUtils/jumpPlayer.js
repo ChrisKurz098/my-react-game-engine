@@ -6,5 +6,6 @@ export default function jumpPlayer(key,jump,scale,kbCheck,jumpSpeed, maxJump, ch
             if (jump === 1 && scale < maxJump) change.scale = scale + jumpSpeed;
             if (jump === 1 && scale >= maxJump) change.jump = 2;
             if (jump === 2 && scale > 1) { change.scale = scale - jumpSpeed; };
-            if (jump === 2 && scale <= 1 && !kbCheck.includes('z')) { change.jump = 0; change.scale = 1 };
+            if (jump === 2 && scale <= 1 && !kbCheck.includes(key)) { change.jump = 0; change.scale = 1 };
+            
 }
