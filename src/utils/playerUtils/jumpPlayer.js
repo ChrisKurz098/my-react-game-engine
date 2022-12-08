@@ -9,5 +9,5 @@ export default function jumpPlayer(key,jump,scale,kbCheck,jumpSpeed, maxJump, ch
             if (jump === 2 && scale > 1) { change.scale = scale - jumpSpeed; };
             if (jump === 2 && scale <= 1 && !kbCheck.includes(key)) { change.jump = 0; change.scale = 1 };
             if (jump === 2 && scale <= 1 && kbCheck.includes(key)) {change.jump = -1; change.scale = 1};
-            console.log(jump)
+         
 }
