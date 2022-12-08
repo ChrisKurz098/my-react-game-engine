@@ -35,7 +35,7 @@ const GameWindow = ({ gameDim }) => {
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
-        eightWayMovement(gameDim,setPlayer, kbCheck, ['z',.04, 2]);
+        tankControls(gameDim,setPlayer, kbCheck, ['z',.04, 2]);
     }, [gameTicker])
 
     return (
