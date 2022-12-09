@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { checkScreenScale } from "../../utils/gameWindowUtils/checkScreenScale";
 import setKeyListeners from "../../utils/gameWindowUtils/setKeyListeners";
 import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
