@@ -7,19 +7,18 @@ import tankControls from "../../utils/playerUtils/tankControls";
 import './gameWindowStyle.css'
 import Wall from "../Wall/wall.component";
 import Player from "../Player/player.component"
+import levelArray from "./level";
 const GameWindow = ({ gameDim, params }) => {
     const { styling } = (params) ? params : {};
     const [gameTicker, setGameTicker] = useState(0);
     const [screenScale, setScreenScale] = useState(window.innerWidth / gameDim.w);
-    const [player, setPlayer] = useState({ w: 50, h: 50, x: 0, y: 0, dir: 0, jump: 0, momentum: .5, cSpd: 0, spdA: 5, spdB: 10, scale: 1 })
+    const [player, setPlayer] = useState({ w: 50, h: 50, x: 80, y: 80, dir: 0, jump: 0, momentum: .5, cSpd: 0, spdA: 5, spdB: 10, scale: 1 })
     const [kbCheck, setKbCheck] = useState([]);
     const [msCheck, setMsCheck] = useState({});
     let borderWidth = (window.innerWidth - (screenScale * gameDim.w)) / 2; //calcualtes the width of the left and right black bars
     const allWalls = [
-        { w: 100, h: 100, x: 500, y: 233, sprite: '/wall.png', tile: false },
-        { w: 100, h: 250, x: 210, y: 533, sprite: '/wall.png', tile: true, tileSize: [100, 100] },
-        { w: 80, h: 400, x: 800, y: 30, jumpOver: true },
-        { w: 100, h: 100, x: 100, y: 233, color: 'blue', styling: { boxShadow: '10px 5px 5px 5px yellow' } }
+        { w: 32, h: 32, x: 320, y: 233, sprite: '/wall.png', tile: true, tileSize: [64, 64] },
+        { w: 32, h: 32, x: 800, y: 30, jumpOver: true },
     ]
 
     useEffect(() => {
@@ -48,9 +47,18 @@ const GameWindow = ({ gameDim, params }) => {
         <div className="game-container">
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px`, ...styling }}>
                 <Player player={player} setPlayer={setPlayer} />
-                {allWalls.map((wallParams, i) => (
-                    <Wall key={`wall${i}`} params={wallParams} />
-                ))}
+                {levelArray.map((row, i) => {
+                    return row.map((wall, j) => {
+                        return (!wall) ? (false) : (<Wall key={`wall${j}`} params={{
+                            ...allWalls[wall - 1],
+                            x: 32 * j,
+                            y: 32 * i
+
+                        }} />)
+                    }
+                    )
+                })
+                };
 
             </div>
         </div>

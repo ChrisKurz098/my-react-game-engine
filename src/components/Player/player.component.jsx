@@ -2,7 +2,7 @@
 import testSprite from '../../resources/img/test.gif'
 
 const Player = ({player, params}) => {
-const {styling} = (params) ? params : {};
+const {styling} = (params) ? params : {} ;
     return (
         <img src={testSprite} alt="pic" style={{ 
             zIndex: '999',

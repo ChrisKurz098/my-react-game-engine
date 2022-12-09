@@ -1,9 +1,8 @@
 export default function collisionWallPlayer(old, change, x, y, h, w) {
     const walls = document.querySelectorAll('.wall');
     walls.forEach((wall) => {
-        if (wall.className.includes('jump-over') && old.jump) {
-
-        } else {
+        if (wall.className.includes('jump-over') && old.jump) {} 
+        else {
            
             //deconstruct style data (strings) from wall element...
             let { height, width, left, top } = wall.style;
@@ -27,6 +26,7 @@ export default function collisionWallPlayer(old, change, x, y, h, w) {
             //...and where the player currently is
             x = (old.x + w / 2) + (w / 2 * hh);
             y = (old.y + h / 2) + (h / 2 * vv);
+            //check if in the wall already
             if (Math.abs(cwx - x) <= (width / 2) &&  Math.abs(cwy - y) <= (height / 2)) {
                 change.x -=  (old.spdB+2) * Math.cos((old.dir) * Math.PI / 180);;
                 change.y += (old.spdB+2) * Math.sin((old.dir) * Math.PI / 180);
