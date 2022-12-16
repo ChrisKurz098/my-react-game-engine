@@ -1,6 +1,6 @@
 
 import './App.css';
-import GameWindow from './components/GameWindow/gamewindow.component';
+import GameWindow from './routes/GameWindow/gamewindow.component';
 function App() {
   return (
     <div className="App">

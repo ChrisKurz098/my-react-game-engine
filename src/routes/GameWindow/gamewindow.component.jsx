@@ -5,8 +5,8 @@ import eightWayMovement from "../../utils/playerUtils/eightWayMovement";
 import mouseAim from "../../utils/playerUtils/mouseAim";
 import tankControls from "../../utils/playerUtils/tankControls";
 import './gameWindowStyle.css'
-import Wall from "../Wall/wall.component";
-import Player from "../Player/player.component"
+import Wall from "../../components/Wall/wall.component";
+import Player from "../../components/Player/player.component"
 import levelArray from "./level";
 const GameWindow = ({ gameDim, params }) => {
     const { styling } = (params) ? params : {};
@@ -32,6 +32,7 @@ const GameWindow = ({ gameDim, params }) => {
     }, [])
 
     useEffect(() => {
+      
         checkScreenScale(gameDim, setScreenScale);
         //---------Game logic goes here---------//
         //--Player Movement--//
@@ -43,6 +44,7 @@ const GameWindow = ({ gameDim, params }) => {
         });
     }, [gameTicker])
 
+  
     return (
         <div className="game-container">
             <div className="game-window" style={{ transform: `scale(${screenScale})`, left: `${borderWidth}px`, width: `${gameDim.w}px`, height: `${gameDim.h}px`, ...styling }}>
